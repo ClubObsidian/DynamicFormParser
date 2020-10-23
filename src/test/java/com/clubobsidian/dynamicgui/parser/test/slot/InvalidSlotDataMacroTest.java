@@ -14,8 +14,7 @@ public class InvalidSlotDataMacroTest {
 
 	
 	@Test
-	public void testInvalidSlotData()
-	{
+	public void testInvalidSlotData() {
 		File slotFolder = new File("test", "slot");
 		File file = new File(slotFolder, "invalid-slot-data-macro.yml");
 		Configuration config = Configuration.load(file);

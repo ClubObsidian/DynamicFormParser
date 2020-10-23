@@ -13,8 +13,7 @@ import com.clubobsidian.wrappy.ConfigurationSection;
 public class ValidUpdateIntervalTest {
 
 	@Test
-	public void updateIntervalTest()
-	{
+	public void updateIntervalTest() {
 		File slotFolder = new File("test", "slot");
 		File file = new File(slotFolder, "valid-update-interval.yml");
 		Configuration config = Configuration.load(file);

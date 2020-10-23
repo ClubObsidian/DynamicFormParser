@@ -31,30 +31,26 @@ public class FunctionNode implements Serializable {
 	private int depth;
 	private FunctionToken token;
 	private List<FunctionNode> children;
-	public FunctionNode(int depth, FunctionToken token)
-	{
+	
+	public FunctionNode(int depth, FunctionToken token) {
 		this.depth = depth;
 		this.token = token;
 		this.children = new ArrayList<>();
 	}
 	
-	public int getDepth()
-	{
+	public int getDepth() {
 		return this.depth;
 	}
 	
-	public FunctionToken getToken()
-	{
+	public FunctionToken getToken() {
 		return this.token;
 	}
 	
-	public List<FunctionNode> getChildren()
-	{
+	public List<FunctionNode> getChildren() {
 		return this.children;
 	}
 	
-	public boolean addChild(FunctionNode child)
-	{
+	public boolean addChild(FunctionNode child) {
 		return this.children.add(child);
 	}
 }

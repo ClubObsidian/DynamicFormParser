@@ -1,6 +1,6 @@
 '0':
   macros:
-    '%valid-type%': "right"
+    '%valid-type%': "click"
   functions:
     some-func:
       type: 

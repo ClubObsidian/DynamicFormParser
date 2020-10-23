@@ -28,7 +28,6 @@ import org.junit.Test;
 import com.clubobsidian.dynamicgui.parser.function.FunctionData;
 import com.clubobsidian.dynamicgui.parser.function.tree.FunctionNode;
 import com.clubobsidian.dynamicgui.parser.function.tree.FunctionTree;
-import com.clubobsidian.dynamicgui.parser.gui.GuiMode;
 import com.clubobsidian.dynamicgui.parser.gui.GuiToken;
 import com.clubobsidian.dynamicgui.parser.macro.MacroToken;
 import com.clubobsidian.dynamicgui.parser.slot.SlotToken;
@@ -40,44 +39,20 @@ public class GuiTokenTest {
 	private static GuiToken token;
 	
 	@BeforeClass
-	public static void loadToken()
-	{
+	public static void loadToken() {
 		File file = new File("test.yml");
 		Configuration config = Configuration.load(file);
 		token = new GuiToken(config);
 	}
 	
 	@Test
-	public void testTitle()
-	{
+	public void testTitle() {
 		String title = token.getTitle();
 		assertTrue("Gui title is not 'test gui title'", title.equals("test gui title"));
 	}
 	
 	@Test
-	public void testRows()
-	{
-		int rows = token.getRows();
-		assertTrue("Gui rows is not 1", rows == 1);
-	}
-	
-	@Test
-	public void testMode()
-	{
-		GuiMode mode = token.getMode();
-		assertTrue("Gui mode is not 'set'", mode == GuiMode.SET);
-	}
-	
-	@Test
-	public void testClose()
-	{
-		boolean closed = token.isClosed();
-		assertTrue("Gui close it not true", closed);
-	}
-	
-	@Test
-	public void testNpcs()
-	{
+	public void testNpcs() {
 		Map<String, List<Integer>> npcs = token.getNpcs();
 		List<Integer> npcIds = npcs.get("citizens");
 		assertTrue("No npc ids were found for citizens", npcIds != null);
@@ -87,15 +62,13 @@ public class GuiTokenTest {
 	}
 	
 	@Test
-	public void testSlots()
-	{
+	public void testSlots() {
 		Map<Integer, SlotToken> slots = token.getSlots();
 		assertTrue("Slots size is not 6", slots.size() == 6);
 	}
 	
 	@Test
-	public void testGuiFunctions()
-	{
+	public void testGuiFunctions() {
 		FunctionTree tree = token.getFunctions();
 		FunctionNode node = tree.getRootNodes().get(0);
 		FunctionData data = node.getToken().getFunctions().get(0);
@@ -104,15 +77,13 @@ public class GuiTokenTest {
 	}
 	
 	@Test
-	public void testMacroToken()
-	{
+	public void testMacroToken() {
 		MacroToken macroToken = token.getMacroParser().getTokens().get(0);
 		assertTrue("Macro token was not initialized", macroToken != null);
 	}
 	
 	@Test
-	public void testExternalMacroToken()
-	{
+	public void testExternalMacroToken() {
 		File externalFile = new File("external.yml");
 		Configuration externalConfig = Configuration.load(externalFile);
 		ConfigurationSection externalMacros = externalConfig.getConfigurationSection("macros");

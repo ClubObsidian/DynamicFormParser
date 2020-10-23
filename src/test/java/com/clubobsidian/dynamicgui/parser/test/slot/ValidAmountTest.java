@@ -13,8 +13,7 @@ import com.clubobsidian.wrappy.ConfigurationSection;
 public class ValidAmountTest {
 
 	@Test
-	public void amountTest()
-	{
+	public void amountTest() {
 		File slotFolder = new File("test", "slot");
 		File file = new File(slotFolder, "valid-amount.yml");
 		Configuration config = Configuration.load(file);

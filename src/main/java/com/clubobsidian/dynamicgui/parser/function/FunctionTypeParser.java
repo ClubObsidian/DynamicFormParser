@@ -29,17 +29,15 @@ public class FunctionTypeParser implements Serializable {
 	private static final long serialVersionUID = -496196602929082383L;
 	
 	private MacroParser macroParser;
-	public FunctionTypeParser(MacroParser macroParser)
-	{
+	
+	public FunctionTypeParser(MacroParser macroParser) {
 		this.macroParser = macroParser;
 	}
 	
-	public List<FunctionType> parseTypes(List<String> types)
-	{
+	public List<FunctionType> parseTypes(List<String> types) {
 		types = this.macroParser.parseListMacros(types);
 		List<FunctionType> typesList = new ArrayList<>();
-		for(String type : types)
-		{
+		for(String type : types) {
 			FunctionType parsedType = this.parseType(type);
 			if(parsedType == null)
 				continue; //TODO - warn
@@ -49,8 +47,7 @@ public class FunctionTypeParser implements Serializable {
 		return typesList;
 	}
 	
-	public FunctionType parseType(String type)
-	{
+	public FunctionType parseType(String type) {
 		FunctionType functionType = FunctionType.getFuzzyType(type);
 		return functionType;
 	}

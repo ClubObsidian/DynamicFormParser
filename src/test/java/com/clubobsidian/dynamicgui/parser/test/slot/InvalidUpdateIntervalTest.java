@@ -13,8 +13,7 @@ import com.clubobsidian.wrappy.ConfigurationSection;
 public class InvalidUpdateIntervalTest {
 
 	@Test
-	public void lessThanZeroupdateIntervalTest()
-	{
+	public void lessThanZeroupdateIntervalTest() {
 		File slotFolder = new File("test", "slot");
 		File file = new File(slotFolder, "invalid-update-interval.yml");
 		Configuration config = Configuration.load(file);
@@ -25,8 +24,7 @@ public class InvalidUpdateIntervalTest {
 	}
 	
 	@Test
-	public void invalidIntervalTest()
-	{
+	public void invalidIntervalTest() {
 		File slotFolder = new File("test", "slot");
 		File file = new File(slotFolder, "invalid-update-interval.yml");
 		Configuration config = Configuration.load(file);

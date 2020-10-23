@@ -15,8 +15,7 @@ import com.clubobsidian.wrappy.Configuration;
 public class MultiMacroSameFileTest {
 
 	@Test
-	public void stringTest()
-	{
+	public void stringTest() {
 		File testFolder = new File("test");
 		File macroFolder = new File(testFolder, "macro"); 
 		File sameFileMacroFile = new File(macroFolder, "multi-same-file-macro.yml");
@@ -24,8 +23,7 @@ public class MultiMacroSameFileTest {
 		Configuration config = Configuration.load(sameFileMacroFile);
 
 		List<MacroToken> tokens = new ArrayList<>();
-		for(String key : config.getKeys())
-		{
+		for(String key : config.getKeys()) {
 			MacroToken token = new MacroToken(config.getConfigurationSection(key));
 			tokens.add(token);
 		}
@@ -38,8 +36,7 @@ public class MultiMacroSameFileTest {
 	}
 	
 	@Test
-	public void listTest()
-	{
+	public void listTest() {
 		File testFolder = new File("test");
 		File macroFolder = new File(testFolder, "macro"); 
 		File sameFileMacroFile = new File(macroFolder, "multi-same-file-macro.yml");
@@ -47,8 +44,7 @@ public class MultiMacroSameFileTest {
 		Configuration config = Configuration.load(sameFileMacroFile);
 
 		List<MacroToken> tokens = new ArrayList<>();
-		for(String key : config.getKeys())
-		{
+		for(String key : config.getKeys()) {
 			MacroToken token = new MacroToken(config.getConfigurationSection(key));
 			tokens.add(token);
 		}

@@ -34,8 +34,7 @@ public class SlotTokenTest {
 	private static SlotToken token;
 	
 	@BeforeClass
-	public static void loadSlotToken()
-	{
+	public static void loadSlotToken() {
 		File file = new File("test.yml");
 		Configuration config = Configuration.load(file);
 		ConfigurationSection section = config.getConfigurationSection("1");
@@ -43,58 +42,50 @@ public class SlotTokenTest {
 	}
 	
 	@Test
-	public void testSlotName()
-	{
+	public void testSlotName() {
 		String name = token.getName();
 		assertTrue("Name was not test for slot token", name.equals("test"));
 	}
 	
 	@Test
-	public void testSlotIcon()
-	{
+	public void testSlotIcon() {
 		String icon = token.getIcon();
 		assertTrue("Icon was not dirt", icon.equals("DIRT"));
 	}
 	
 	@Test
-	public void testSlotNbt()
-	{
+	public void testSlotNbt() {
 		String nbt = token.getNbt();
 		assertTrue("Nbt was not '{SomeKey:\"some value\"}'", nbt.equals("{SomeKey:\"some value\"}"));
 	}
 	
 	@Test
-	public void testSlotGlow()
-	{
+	public void testSlotGlow() {
 		boolean glow = token.getGlow();
 		assertFalse(glow);
 	}
 	
 	@Test
-	public void testSlotClose()
-	{
+	public void testSlotClose() {
 		boolean close = token.isClosed();
 		assertTrue("Close not was true", close);
 	}
 	
 	@Test
-	public void testSlotData()
-	{
+	public void testSlotData() {
 		byte data = token.getData();
 		assertTrue("Data was not 1", data == 1);
 	}
 	
 	@Test
-	public void testSlotFunctionTree()
-	{
+	public void testSlotFunctionTree() {
 		FunctionTree tree = token.getFunctionTree();
 		int nodeSize = tree.getRootNodes().size();
 		assertTrue("Node were not parsed for the function tree", nodeSize == 1);
 	}
 	
 	@Test
-	public void testMacroToken()
-	{
+	public void testMacroToken() {
 		MacroToken macroToken = token.getMacroParser().getTokens().get(0);
 		assertTrue("Macro token was not initialized", macroToken != null);
 	}

@@ -15,8 +15,7 @@ import com.clubobsidian.wrappy.ConfigurationSection;
 public class MacrosTokenTest {
 
 	@Test
-	public void testGuiMacroToken()
-	{
+	public void testGuiMacroToken() {
 		File file = new File("test.yml");
 		Configuration config = Configuration.load(file);
 		ConfigurationSection section = config
@@ -29,8 +28,7 @@ public class MacrosTokenTest {
 	
 	@Test
 	@SuppressWarnings("rawtypes")
-	public void testSlotMacroToken()
-	{
+	public void testSlotMacroToken() {
 		File file = new File("test.yml");
 		Configuration config = Configuration.load(file);
 		ConfigurationSection section = config
@@ -57,8 +55,7 @@ public class MacrosTokenTest {
 	}
 	
 	@Test
-	public void testEmptyMacroToken()
-	{
+	public void testEmptyMacroToken() {
 		File file = new File("test.yml");
 		Configuration config = Configuration.load(file);
 		ConfigurationSection section = config

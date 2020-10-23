@@ -35,11 +35,9 @@ public class GuiToken implements Serializable {
 	 */
 	private static final long serialVersionUID = -1815626830683338944L;
 	
+	private static final int MAX_SLOT_SIZE = 100; //Temporary fix
+	
 	private String title;
-	private String type;
-	private int rows;
-	private GuiMode mode;
-	private boolean closed;
 	private List<String> alias;
 	private List<String> locations;
 	private Map<String, List<Integer>> npcs;
@@ -47,147 +45,82 @@ public class GuiToken implements Serializable {
 	private MacroParser macroParser;
 	private FunctionTree functions;
 	private List<String> loadMacros;
-	public GuiToken(ConfigurationSection section)
-	{
+	
+	public GuiToken(ConfigurationSection section) {
 		this(section, new ArrayList<MacroToken>());
 	}
 	
-	public GuiToken(ConfigurationSection section, List<MacroToken> macroTokens)
-	{
+	public GuiToken(ConfigurationSection section, List<MacroToken> macroTokens) {
 		List<MacroToken> copyMacroTokens = new ArrayList<MacroToken>();
-		for(MacroToken token : macroTokens)
-		{
+		for(MacroToken token : macroTokens) {
 			copyMacroTokens.add(token);
 		}
 		
 		ConfigurationSection macrosSection = section.getConfigurationSection("macros");
 		copyMacroTokens.add(new MacroToken(macrosSection));
 		
-		
 		this.macroParser = new MacroParser(copyMacroTokens);
-		
 		this.title = this.macroParser.parseStringMacros(section.getString("title"));
-		this.type = this.parseType(section.getString("type"));
-		this.rows = section.getInteger("rows");
-		this.mode = this.parseMode(section.getString("mode"));
-		this.closed = section.getBoolean("close");
 		this.alias = this.macroParser.parseListMacros(section.getStringList("alias"));
 		this.locations = this.macroParser.parseListMacros(section.getStringList("locations"));
 		this.loadNpcs(section);
 		this.loadSlots(section);
 		
-		
 		ConfigurationSection guiFunctionsSection = section.getConfigurationSection("functions");
 		this.functions = new FunctionTree(guiFunctionsSection, this.macroParser);
-		
 		this.loadMacros = section.getStringList("load-macros");
 	}
 	
-	public String parseType(String type)
-	{
-		if(type == null)
-		{
-			return "CHEST";
-		}
-		return type.toUpperCase();
-	}
-	
-	private GuiMode parseMode(String mode)
-	{
-		if(mode == null)
-		{
-			return GuiMode.SET;
-		}
-		
-		return GuiMode.valueOf(mode.toUpperCase());
-	}
-	
-	private void loadNpcs(ConfigurationSection section)
-	{
+	private void loadNpcs(ConfigurationSection section) {
 		this.npcs = new HashMap<>();
 		ConfigurationSection npcSection = section.getConfigurationSection("npcs");
-		for(String key : npcSection.getKeys())
-		{
+		for(String key : npcSection.getKeys()) {
 			List<Integer> npcIds = npcSection.getIntegerList(key);
-			npcs.put(key, npcIds);
+			this.npcs.put(key, npcIds);
 		}
 	}
 	
 	
-	private void loadSlots(ConfigurationSection section)
-	{
+	private void loadSlots(ConfigurationSection section) {
 		this.slots = new LinkedHashMap<>();
-		
-		int slots = this.rows * 9;
-		
-		for(int i = 0; i < slots; i++)
-		{
+		for(int i = 0; i < MAX_SLOT_SIZE; i++) {
 			ConfigurationSection slotSection = section.getConfigurationSection(String.valueOf(i));
-			if(!slotSection.isEmpty())
-			{
+			if(!slotSection.isEmpty()) {
 				SlotToken token = new SlotToken(i, slotSection, this.macroParser.getTokens());
 				this.slots.put(i, token);
 			}
 		}
 	}
 	
-	public String getTitle()
-	{
+	public String getTitle() {
 		return this.title;
 	}
 	
-	public String getType()
-	{
-		return this.type;
-	}
-	
-	public int getRows()
-	{
-		return this.rows;
-	}
-	
-	public GuiMode getMode()
-	{
-		return this.mode;
-	}
-	
-	public boolean isClosed()
-	{
-		return this.closed;
-	}
-	
-	public List<String> getAlias()
-	{
+	public List<String> getAlias() {
 		return this.alias;
 	}
 	
-	public List<String> getLocations()
-	{
+	public List<String> getLocations() {
 		return this.locations;
 	}
 	
-	public Map<String, List<Integer>> getNpcs()
-	{
+	public Map<String, List<Integer>> getNpcs() {
 		return this.npcs;
 	}
 	
-	public Map<Integer, SlotToken> getSlots()
-	{
+	public Map<Integer, SlotToken> getSlots() {
 		return this.slots;
 	}
 	
-	public FunctionTree getFunctions()
-	{
+	public FunctionTree getFunctions() {
 		return this.functions;
 	}
 	
-	public MacroParser getMacroParser()
-	{
+	public MacroParser getMacroParser() {
 		return this.macroParser;
 	}
 	
-	public List<String> getLoadMacros()
-	{
+	public List<String> getLoadMacros() {
 		return this.loadMacros;
 	}
 }

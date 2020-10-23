@@ -9,8 +9,7 @@ import com.clubobsidian.dynamicgui.parser.function.tree.FunctionTree;
 public class EmptyFunctionTreeTest {
 
 	@Test
-	public void testEmptyFunctionTree()
-	{
+	public void testEmptyFunctionTree() {
 		FunctionTree tree = new FunctionTree();
 		assertTrue("Tree nodes are not empty", tree.getRootNodes().size() == 0);
 	}

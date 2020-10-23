@@ -13,8 +13,7 @@ import com.clubobsidian.wrappy.ConfigurationSection;
 public class SlotIndexTest {
 
 	@Test
-	public void testSlotIndex()
-	{
+	public void testSlotIndex() {
 		File slotFolder = new File("test", "slot");
 		File file = new File(slotFolder, "slot-index.yml");
 		Configuration config = Configuration.load(file);

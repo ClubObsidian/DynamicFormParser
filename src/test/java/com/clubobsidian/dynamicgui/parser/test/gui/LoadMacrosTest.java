@@ -13,8 +13,7 @@ import com.clubobsidian.wrappy.Configuration;
 public class LoadMacrosTest {
 
 	@Test
-	public void testLoadMacros()
-	{
+	public void testLoadMacros() {
 		File slotFolder = new File("test", "gui");
 		File file = new File(slotFolder, "load-macros.yml");
 		Configuration config = Configuration.load(file);

@@ -16,8 +16,7 @@ public class InvalidFunctionTypeMacroTest {
 
 	
 	@Test
-	public void invalidFunctionTypeTest()
-	{
+	public void invalidFunctionTypeTest() {
 		File slotFolder = new File("test", "slot");
 		File file = new File(slotFolder, "invalid-function-type-macro.yml");
 		Configuration config = Configuration.load(file);
@@ -25,6 +24,6 @@ public class InvalidFunctionTypeMacroTest {
 		SlotToken token = new SlotToken(0, section);
 		FunctionTree tree = token.getFunctionTree();
 		FunctionToken functionToken = tree.getRootNodes().get(0).getToken();
-		assertTrue("Function node parsed incorrect function type", functionToken.getTypes().size() == 1);
+		assertTrue("Function node parsed incorrect function type", functionToken.getTypes().size() == 0);
 	}
 }

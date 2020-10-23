@@ -14,8 +14,7 @@ import com.clubobsidian.wrappy.ConfigurationSection;
 public class SlotMetadataTest {
 
 	@Test
-	public void testSlotMetadata()
-	{
+	public void testSlotMetadata() {
 		File slotFolder = new File("test", "slot");
 		File metadataFile = new File(slotFolder, "metadata.yml");
 		Configuration config = Configuration.load(metadataFile);
@@ -27,8 +26,7 @@ public class SlotMetadataTest {
 	}
 	
 	@Test
-	public void testSlotNoMetadata()
-	{
+	public void testSlotNoMetadata() {
 		File slotFolder = new File("test", "slot");
 		File metadataFile = new File(slotFolder, "metadata.yml");
 		Configuration config = Configuration.load(metadataFile);

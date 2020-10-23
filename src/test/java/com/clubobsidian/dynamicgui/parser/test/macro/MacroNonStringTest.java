@@ -16,8 +16,7 @@ import com.clubobsidian.wrappy.ConfigurationSection;
 public class MacroNonStringTest {
 
 	@Test
-	public void testNonStringParseStringMacros()
-	{
+	public void testNonStringParseStringMacros() {
 		File guiFolder = new File("test", "gui");
 		File file = new File(guiFolder, "non-string-macro.yml");
 		Configuration config = Configuration.load(file);
@@ -32,8 +31,7 @@ public class MacroNonStringTest {
 	}
 	
 	@Test
-	public void testNonStringParseListMacros()
-	{
+	public void testNonStringParseListMacros() {
 		File guiFolder = new File("test", "gui");
 		File file = new File(guiFolder, "non-string-macro.yml");
 		Configuration config = Configuration.load(file);

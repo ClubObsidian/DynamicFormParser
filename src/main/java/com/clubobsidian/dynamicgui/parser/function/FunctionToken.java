@@ -29,31 +29,27 @@ public class FunctionToken implements Serializable {
 	private List<FunctionType> types;
 	private List<FunctionData> functions;
 	private List<FunctionData> failOnFunctions;
-	public FunctionToken(String name, List<FunctionType> types, List<FunctionData> functions, List<FunctionData> failOnFunctions)
-	{
+	
+	public FunctionToken(String name, List<FunctionType> types, List<FunctionData> functions, List<FunctionData> failOnFunctions) {
 		this.name = name;
 		this.types = types;
 		this.functions = functions;
 		this.failOnFunctions = failOnFunctions;
 	}
 	
-	public String getName()
-	{
+	public String getName() {
 		return this.name;
 	}
 	
-	public List<FunctionType> getTypes()
-	{
+	public List<FunctionType> getTypes() {
 		return this.types;
 	}
 	
-	public List<FunctionData> getFunctions()
-	{
+	public List<FunctionData> getFunctions() {
 		return this.functions;
 	}
 	
-	public List<FunctionData> getFailOnFunctions()
-	{
+	public List<FunctionData> getFailOnFunctions() {
 		return this.failOnFunctions;
 	}
 }

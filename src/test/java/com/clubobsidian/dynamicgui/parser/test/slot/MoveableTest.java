@@ -14,8 +14,7 @@ import com.clubobsidian.wrappy.ConfigurationSection;
 public class MoveableTest {
 
 	@Test
-	public void testSlotMoveable()
-	{
+	public void testSlotMoveable() {
 		File slotFolder = new File("test", "slot");
 		File metadataFile = new File(slotFolder, "moveable.yml");
 		Configuration config = Configuration.load(metadataFile);
@@ -25,8 +24,7 @@ public class MoveableTest {
 	}
 	
 	@Test
-	public void testSlotNotMoveable()
-	{
+	public void testSlotNotMoveable() {
 		File slotFolder = new File("test", "slot");
 		File metadataFile = new File(slotFolder, "moveable.yml");
 		Configuration config = Configuration.load(metadataFile);

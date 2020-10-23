@@ -28,19 +28,17 @@ public class FunctionData implements Serializable {
 	
 	private final String name;
 	private final String data;
-	public FunctionData(String name, String data)
-	{
+	
+	public FunctionData(String name, String data) {
 		this.name = StringFuzz.normalize(name);
 		this.data = data;
 	}
 	
-	public String getName()
-	{
+	public String getName() {
 		return this.name;
 	}
 	
-	public String getData()
-	{
+	public String getData() {
 		return this.data;
 	}
 }

@@ -14,8 +14,7 @@ public class ValidSlotDataMacroTest {
 
 	
 	@Test
-	public void validSlotDataMacroTest()
-	{
+	public void validSlotDataMacroTest() {
 		File slotFolder = new File("test", "slot");
 		File file = new File(slotFolder, "valid-slot-data-macro.yml");
 		Configuration config = Configuration.load(file);

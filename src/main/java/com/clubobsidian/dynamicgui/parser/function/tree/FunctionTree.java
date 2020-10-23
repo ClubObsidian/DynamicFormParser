@@ -38,49 +38,41 @@ public class FunctionTree implements Serializable {
 	private List<FunctionNode> rootNodes;
 	private MacroParser macroParser;
 	private FunctionTypeParser functionTypeParser;
-	public FunctionTree()
-	{
+	
+	public FunctionTree() {
 		this(new ArrayList<FunctionNode>(), new MacroParser(new ArrayList<MacroToken>()));
 	}
 	
-	public FunctionTree(List<FunctionNode> rootNodes, MacroParser macroParser)
-	{
+	public FunctionTree(List<FunctionNode> rootNodes, MacroParser macroParser) {
 		this.rootNodes = rootNodes;
 		this.macroParser = macroParser;
 		this.functionTypeParser = new FunctionTypeParser(this.macroParser);
 	}
 	
-	public FunctionTree(ConfigurationSection section)
-	{
+	public FunctionTree(ConfigurationSection section) {
 		this(section, new MacroParser(new ArrayList<MacroToken>()));
 	}
 	
-	public FunctionTree(ConfigurationSection section, MacroParser macroParser)
-	{
+	public FunctionTree(ConfigurationSection section, MacroParser macroParser) {
 		this(new ArrayList<FunctionNode>(), macroParser);
 		this.parseNodes(section);
 	}
 	
-	public List<FunctionNode> getRootNodes()
-	{
+	public List<FunctionNode> getRootNodes() {
 		return this.rootNodes;
 	}
 	
-	public MacroParser getMacroParser()
-	{
+	public MacroParser getMacroParser() {
 		return this.macroParser;
 	}
 	
-	private void parseNodes(ConfigurationSection section)
-	{
+	private void parseNodes(ConfigurationSection section) {
 		int depth = 0;
 		this.walkTree(depth, section, null);
 	}
 	
-	private String[] parseFunctionData(String functionData)
-	{
-		if(!functionData.contains(":"))
-		{
+	private String[] parseFunctionData(String functionData) {
+		if(!functionData.contains(":")) {
 			String[] args = new String[2];
 			args[0] = functionData;
 			args[1] = null;
@@ -93,10 +85,10 @@ public class FunctionTree implements Serializable {
 		
 		dat = args[1].trim();
 		
-		if(args.length > 2)
-		{
-			for(int i = 2; i < args.length; i++)
+		if(args.length > 2) {
+			for(int i = 2; i < args.length; i++) {
 				dat +=  ":" + args[i];
+			}
 		}
 		
 		ar[0] = StringFuzz.normalize(args[0]);
@@ -104,13 +96,11 @@ public class FunctionTree implements Serializable {
 		return ar;	
 	}
 	
-	private List<FunctionData> parseFunctionData(final List<String> tokens)
-	{
+	private List<FunctionData> parseFunctionData(final List<String> tokens) {
 		List<String> parsedTokens = this.macroParser.parseListMacros(tokens);
-		
 		List<FunctionData> functionTokens = new ArrayList<FunctionData>();
-		for(String token : parsedTokens)
-		{
+		
+		for(String token : parsedTokens) {
 			String[] parsedFunctionData = this.parseFunctionData(token);
 			String functionName = parsedFunctionData[0];
 			String functionData = parsedFunctionData[1];
@@ -119,13 +109,10 @@ public class FunctionTree implements Serializable {
 		return functionTokens;
 	}
 	
-	private void walkTree(int depth, ConfigurationSection section, FunctionNode parentNode)
-	{
-		for(String rootKey : section.getKeys())
-		{
+	private void walkTree(int depth, ConfigurationSection section, FunctionNode parentNode) {
+		for(String rootKey : section.getKeys()) {
 			ConfigurationSection rootSection = section.getConfigurationSection(rootKey);
-			if(rootSection.get("functions") == null)
-			{
+			if(rootSection.get("functions") == null) {
 				continue;
 			}
 			
@@ -137,12 +124,9 @@ public class FunctionTree implements Serializable {
 			FunctionToken data = new FunctionToken(name, types, functionTokens, failFunctions);
 			FunctionNode childNode = new FunctionNode(depth, data);
 			
-			if(depth == 0)
-			{
+			if(depth == 0) {
 				this.rootNodes.add(childNode);
-			}
-			else
-			{
+			} else {
 				parentNode.addChild(childNode);
 			}
 			

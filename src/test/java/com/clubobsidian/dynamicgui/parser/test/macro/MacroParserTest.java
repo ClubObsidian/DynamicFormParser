@@ -16,8 +16,7 @@ import com.clubobsidian.wrappy.ConfigurationSection;
 public class MacroParserTest {
 
 	@Test
-	public void testMultilineParsing()
-	{
+	public void testMultilineParsing() {
 		File test = new File("test.yml");
 		Configuration config = Configuration.load(test);
 		
@@ -49,8 +48,7 @@ public class MacroParserTest {
 	}
 	
 	@Test
-	public void testSmallMultiLine()
-	{
+	public void testSmallMultiLine() {
 		File test = new File("test.yml");
 		Configuration config = Configuration.load(test);
 		
@@ -76,8 +74,7 @@ public class MacroParserTest {
 	}
 	
 	@Test
-	public void testOutOfIndexSmallMultiLine()
-	{
+	public void testOutOfIndexSmallMultiLine() {
 		File test = new File("test.yml");
 		Configuration config = Configuration.load(test);
 		
@@ -102,8 +99,7 @@ public class MacroParserTest {
 	}
 	
 	@Test
-	public void testSingleLineParsing()
-	{
+	public void testSingleLineParsing() {
 		File test = new File("test.yml");
 		Configuration config = Configuration.load(test);
 		
@@ -125,8 +121,7 @@ public class MacroParserTest {
 	}
 	
 	@Test
-	public void testMacroChaining()
-	{
+	public void testMacroChaining() {
 		File test = new File("test.yml");
 		Configuration config = Configuration.load(test);
 		

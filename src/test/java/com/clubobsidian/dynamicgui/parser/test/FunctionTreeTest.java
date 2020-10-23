@@ -37,8 +37,7 @@ public class FunctionTreeTest {
 	private static FunctionTree tree;
 	
 	@BeforeClass
-	public static void loadTree()
-	{
+	public static void loadTree() {
 		File testFile = new File("test.yml");
 		Configuration config = Configuration.load(testFile);
 		ConfigurationSection firstSlotSection = config.getConfigurationSection("0");
@@ -47,15 +46,13 @@ public class FunctionTreeTest {
 	}
 	
 	@Test
-	public void testRootNodeSize()
-	{
+	public void testRootNodeSize() {
 		int rootNodeSize = tree.getRootNodes().size();
 		assertTrue("Root node size is not three", rootNodeSize == 3);
 	}
 	
 	@Test
-	public void testFunctionTypes()
-	{
+	public void testFunctionTypes() {
 		FunctionNode node = tree.getRootNodes().get(0);
 		FunctionToken token = node.getToken();
 		FunctionType type = token.getTypes().get(0);
@@ -63,8 +60,7 @@ public class FunctionTreeTest {
 	}
 	
 	@Test
-	public void testDescend()
-	{
+	public void testDescend() {
 		List<FunctionNode> childrenNodes = tree.getRootNodes().get(0).getChildren();
 		int childrenNodeSize = childrenNodes.size();
 		FunctionToken token = childrenNodes.get(0).getToken();
@@ -75,16 +71,14 @@ public class FunctionTreeTest {
 	}
 	
 	@Test
-	public void testDescendTwoFunctions()
-	{
+	public void testDescendTwoFunctions() {
 		List<FunctionNode> childrenNodes = tree.getRootNodes().get(1).getChildren();
 		int childrenNodeSize = childrenNodes.size();
 		assertTrue("Children node size for descend is not two", childrenNodeSize == 2);
 	}
 	
 	@Test
-	public void testDepthTwo()
-	{
+	public void testDepthTwo() {
 		List<FunctionNode> childrenNodes = tree.getRootNodes().get(1).getChildren().get(0).getChildren();
 		int childrenNodeSize = childrenNodes.size();
 		FunctionNode node = childrenNodes.get(0);
@@ -99,8 +93,7 @@ public class FunctionTreeTest {
 	}
 	
 	@Test
-	public void testColonParsing()
-	{
+	public void testColonParsing() {
 		FunctionNode node = tree.getRootNodes().get(2);
 		FunctionToken token = node.getToken();
 		FunctionData data = token.getFunctions().get(1);
@@ -109,8 +102,7 @@ public class FunctionTreeTest {
 	}
 	
 	@Test
-	public void testTrimming()
-	{
+	public void testTrimming() {
 		FunctionNode node = tree.getRootNodes().get(2);
 		FunctionToken token = node.getToken();
 		FunctionData data = token.getFunctions().get(2);
@@ -119,8 +111,7 @@ public class FunctionTreeTest {
 	}
 	
 	@Test
-	public void testNormalize()
-	{
+	public void testNormalize() {
 		FunctionNode node = tree.getRootNodes().get(0);
 		FunctionToken token = node.getToken();
 		FunctionData data = token.getFunctions().get(1);
@@ -129,8 +120,7 @@ public class FunctionTreeTest {
 	}
 	
 	@Test
-	public void testFailFunctionsList()
-	{
+	public void testFailFunctionsList() {
 		File testFile = new File("test.yml");
 		Configuration config = Configuration.load(testFile);
 		ConfigurationSection firstSlotSection = config.getConfigurationSection("4");
@@ -146,8 +136,7 @@ public class FunctionTreeTest {
 	}
 	
 	@Test
-	public void testFailFunctionsString()
-	{
+	public void testFailFunctionsString() {
 		File testFile = new File("test.yml");
 		Configuration config = Configuration.load(testFile);
 		ConfigurationSection firstSlotSection = config.getConfigurationSection("4");
@@ -163,8 +152,7 @@ public class FunctionTreeTest {
 	}
 	
 	@Test
-	public void testMacroTokens()
-	{
+	public void testMacroTokens() {
 		List<MacroToken> tokens = tree.getMacroParser().getTokens();
 		assertTrue("MacroToken's for functions should not be null", tokens != null);
 	}

@@ -12,8 +12,7 @@ import com.clubobsidian.wrappy.Configuration;
 public class LocationTest {
 
 	@Test
-	public void testAlias()
-	{
+	public void testAlias() {
 		File slotFolder = new File("test", "gui");
 		File file = new File(slotFolder, "location.yml");
 		Configuration config = Configuration.load(file);

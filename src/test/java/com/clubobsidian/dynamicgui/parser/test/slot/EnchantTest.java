@@ -14,8 +14,7 @@ import com.clubobsidian.wrappy.ConfigurationSection;
 public class EnchantTest {
 
 	@Test
-	public void enchantTest()
-	{
+	public void enchantTest() {
 		File slotFolder = new File("test", "slot");
 		File file = new File(slotFolder, "enchants.yml");
 		Configuration config = Configuration.load(file);

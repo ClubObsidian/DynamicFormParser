@@ -14,8 +14,7 @@ import com.clubobsidian.wrappy.ConfigurationSection;
 public class LoreTest {
 
 	@Test
-	public void loreTest()
-	{
+	public void loreTest() {
 		File slotFolder = new File("test", "slot");
 		File file = new File(slotFolder, "lore.yml");
 		Configuration config = Configuration.load(file);
