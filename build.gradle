@@ -14,6 +14,7 @@ repositories {
 
 dependencies {
 	testImplementation 'junit:junit:4.12'
+	testImplementation 'com.github.clubobsidian:wrappy:2.0.1'
 	compileOnly 'com.github.clubobsidian:wrappy:2.0.1'
 	compile 'com.github.ClubObsidian:FuzzUtil:1.1.0'
 	compile 'org.apache.commons:commons-lang3:3.9'
