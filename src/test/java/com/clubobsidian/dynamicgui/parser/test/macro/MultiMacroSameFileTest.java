@@ -59,5 +59,4 @@ public class MultiMacroSameFileTest {
 		assertTrue(parsed.get(0).equals("test1"));
 		assertTrue(parsed.get(1).equals("test2"));
 	}
-	
 }

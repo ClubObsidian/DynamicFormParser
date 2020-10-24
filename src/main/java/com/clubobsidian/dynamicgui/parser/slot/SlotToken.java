@@ -34,17 +34,9 @@ public class SlotToken implements Serializable {
 	private static final long serialVersionUID = -1898426889177654844L;
 	
 	private int index;
-	private int amount;
 	private String icon;
 	private String name;
-	private String nbt;
-	private boolean glow;
-	private boolean moveable;
 	private boolean closed;
-	private byte data;
-	private List<String> lore;
-	private List<String> enchants;
-	private int updateInterval;
 	private MacroParser macroParser;
 	private FunctionTree functionTree;
 	private Map<String, String> metadata;
@@ -67,46 +59,15 @@ public class SlotToken implements Serializable {
 		this.macroParser = new MacroParser(copyMacroTokens);
 		
 		this.index = index;
-		this.amount = this.parseAmount(section.getInteger("amount"));
 		this.icon = this.macroParser.parseStringMacros(section.getString("icon"));
 		this.name = this.macroParser.parseStringMacros(section.getString("name"));
-		this.nbt = this.macroParser.parseStringMacros(section.getString("nbt"));
-		this.glow = this.parseBoolean(section.getString("glow"));
-		this.moveable = this.parseBoolean(section.getString("moveable"));
 		this.closed = this.parseBoolean(section.getString("close"));
-		this.data = this.parseByte(section.getString("data"));
-		this.lore = this.macroParser.parseListMacros(section.getStringList("lore"));
-		this.enchants = this.macroParser.parseListMacros(section.getStringList("enchants"));
-		this.updateInterval = this.parseUpdateInterval(section.getString("update-interval"));
 		
 		ConfigurationSection functionsSection = section.getConfigurationSection("functions");
 		this.functionTree = new FunctionTree(functionsSection, this.macroParser);
 		
 		ConfigurationSection metadataSection = section.getConfigurationSection("metadata");
 		this.metadata = this.parseMetadata(metadataSection);		
-	}
-	
-	private int parseAmount(int amount)
-	{
-		if(amount == 0)
-		{
-			return 1;
-		}
-		return amount;
-	}
-	
-	private byte parseByte(String data)
-	{
-		String stringData = this.macroParser.parseStringMacros(data);
-		try
-		{
-			byte bytes = Byte.parseByte(stringData);
-			return bytes;
-		}
-		catch(Exception ex)
-		{
-			return 0;
-		}
 	}
 	
 	private boolean parseBoolean(String data)
