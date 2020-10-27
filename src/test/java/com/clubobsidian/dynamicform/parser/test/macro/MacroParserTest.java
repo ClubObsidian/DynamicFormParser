@@ -106,7 +106,7 @@ public class MacroParserTest {
 		ConfigurationSection first = config.getConfigurationSection("2");
 		ConfigurationSection macros = first.getConfigurationSection("macros");
 		
-		String name = first.getString("name");
+		String name = first.getString("label");
 		
 		MacroToken token = new MacroToken(macros);
 		

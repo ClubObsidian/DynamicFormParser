@@ -21,7 +21,7 @@ functions:
     - "function-2"
 
 '0':
-  name: "Some name"
+  label: "Some name"
   functions:
     load:
       type: 
@@ -64,7 +64,7 @@ functions:
       - "function: with:a colon"
       - "functions:  test trimming   "
 '1': #First SlotToken test
-  name: "test"
+  label: "test"
   icon: "DIRT"
   nbt: "{SomeKey:\"some value\"}"
   close: true
@@ -77,7 +77,7 @@ functions:
       functions:
       - "function"
 '2': #Macro test
-  name: "%name-macro%"
+  label: "%name-macro%"
   macros:
     '%name-macro%': "A name"
     '%test%': "This is some text"
