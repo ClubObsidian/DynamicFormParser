@@ -36,20 +36,17 @@ public class SlotToken implements Serializable {
 	private int index;
 	private String icon;
 	private String name;
-	private boolean closed;
 	private MacroParser macroParser;
 	private FunctionTree functionTree;
 	private Map<String, String> metadata;
-	public SlotToken(int index, ConfigurationSection section)
-	{
+	
+	public SlotToken(int index, ConfigurationSection section) {
 		this(index, section, new ArrayList<MacroToken>());
 	}
 	
-	public SlotToken(int index, ConfigurationSection section, List<MacroToken> macroTokens)
-	{
+	public SlotToken(int index, ConfigurationSection section, List<MacroToken> macroTokens) {
 		List<MacroToken> copyMacroTokens = new ArrayList<>();
-		for(MacroToken macroToken : macroTokens)
-		{
+		for(MacroToken macroToken : macroTokens) {
 			copyMacroTokens.add(macroToken);
 		}
 		
@@ -61,7 +58,6 @@ public class SlotToken implements Serializable {
 		this.index = index;
 		this.icon = this.macroParser.parseStringMacros(section.getString("icon"));
 		this.name = this.macroParser.parseStringMacros(section.getString("name"));
-		this.closed = this.parseBoolean(section.getString("close"));
 		
 		ConfigurationSection functionsSection = section.getConfigurationSection("functions");
 		this.functionTree = new FunctionTree(functionsSection, this.macroParser);
@@ -70,135 +66,64 @@ public class SlotToken implements Serializable {
 		this.metadata = this.parseMetadata(metadataSection);		
 	}
 	
-	private boolean parseBoolean(String data)
-	{
-		if(data == null)
-		{
+	private boolean parseBoolean(String data) {
+		if(data == null) {
 			return false;
 		}
 		
 		String parsed = this.macroParser.parseStringMacros(data);
-		if(data.equals("true"))
-		{
+		if(data.equals("true")) {
 			return Boolean.parseBoolean(parsed);
 		}
 		
 		return false;
 	}
 	
-	private int parseInteger(String data) 
-	{
-		if(data == null)
-		{
+	private int parseInteger(String data) {
+		if(data == null) {
 			return 0;
 		}
 		
-		try
-		{
+		try {
 			String parsed = this.macroParser.parseStringMacros(data);
 			return Integer.valueOf(parsed);
-		}
-		catch(Exception ex)
-		{
+		} catch(Exception ex) {
 			return 0;
 		}
 	}
 	
-	private int parseUpdateInterval(String data)
-	{
-		int updateInterval = this.parseInteger(data);
-		if(updateInterval < 0)
-			return 0;
-		
-		return updateInterval;
-	}
-	
-	private Map<String, String> parseMetadata(ConfigurationSection section)
-	{
+	private Map<String, String> parseMetadata(ConfigurationSection section) {
 		Map<String, String> metadata = new HashMap<>();
-		for(String key : section.getKeys())
-		{
+		for(String key : section.getKeys()) {
 			String parsedKey = this.macroParser.parseStringMacros(key);
 			String value = section.getString(parsedKey);
 			value = this.macroParser.parseStringMacros(value);
 			metadata.put(parsedKey, value);
 		}
-		
 		return metadata;
 	}
 	
-	public int getIndex()
-	{
+	public int getIndex() {
 		return this.index;
 	}
 	
-	public int getAmount()
-	{
-		return this.amount;
-	}
-	
-	public String getIcon()
-	{
+	public String getIcon() {
 		return this.icon;
 	}
 	
-	public String getName()
-	{
+	public String getName() {
 		return this.name;
 	}
 	
-	public String getNbt()
-	{
-		return this.nbt;
-	}
-	
-	public boolean getGlow()
-	{
-		return this.glow;
-	}
-	
-	public boolean isMoveable()
-	{
-		return this.moveable;
-	}
-	
-	public boolean isClosed()
-	{
-		return this.closed;
-	}
-	
-	public byte getData()
-	{
-		return this.data;
-	}
-	
-	public List<String> getLore()
-	{
-		return this.lore;
-	}
-	
-	public int getUpdateInterval()
-	{
-		return this.updateInterval;
-	}
-	
-	public List<String> getEnchants()
-	{
-		return this.enchants;
-	}
-	
-	public FunctionTree getFunctionTree()
-	{
+	public FunctionTree getFunctionTree() {
 		return this.functionTree;
 	}
 	
-	public MacroParser getMacroParser()
-	{
+	public MacroParser getMacroParser() {
 		return this.macroParser;
 	}
 	
-	public Map<String, String> getMetadata()
-	{
+	public Map<String, String> getMetadata() {
 		return this.metadata;
 	}
 }

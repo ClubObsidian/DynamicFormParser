@@ -32,45 +32,38 @@ public class MacroParser implements Serializable {
 	private static final long serialVersionUID = -4558006309742656177L;
 	
 	private List<MacroToken> tokens;
-	public MacroParser(List<MacroToken> tokens)
-	{
+	
+	public MacroParser(List<MacroToken> tokens) {
 		this.tokens = tokens;
 	}
 	
-	public List<MacroToken> getTokens()
-	{
+	public List<MacroToken> getTokens() {
 		return Collections.unmodifiableList(this.tokens);
 	}
 	
-	public String parseStringMacros(final String replaceIn)
-	{
-		if(replaceIn == null)
+	public String parseStringMacros(final String replaceIn) {
+		if(replaceIn == null) {
 			return null;
+		}
 		
 		String replace = replaceIn;
-		for(MacroToken token : this.tokens)
-		{
+		for(MacroToken token : this.tokens) {
 			Iterator<Entry<String, Object>> it = token.getMacros().entrySet().iterator();
-			while(it.hasNext())
-			{
+			while(it.hasNext()) {
 				Entry<String, Object> next = it.next();
 				String key = next.getKey();
 				Object value = next.getValue();
 				
-				if(replace.contains(key))
-				{
+				if(replace.contains(key)) {
 					replace = StringUtils.replace(replace, key, value.toString());
 				}
 			}
 		}
 		
-		for(MacroToken token : this.tokens)
-		{
-			for(Entry<String, Object> entry : token.getMacros().entrySet())
-			{
+		for(MacroToken token : this.tokens) {
+			for(Entry<String, Object> entry : token.getMacros().entrySet()) {
 				String key = entry.getKey();
-				if(replace.contains(key))
-				{
+				if(replace.contains(key)) {
 					return this.parseStringMacros(replace);
 				}
 			}
@@ -80,38 +73,29 @@ public class MacroParser implements Serializable {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<String> parseListMacros(final List<String> replaceIn)
-	{
+	public List<String> parseListMacros(final List<String> replaceIn) {
 		List<String> newList = new ArrayList<>();
 
-		for(String line : replaceIn)
-		{
+		for(String line : replaceIn) {
 			newList.add(line);
 		}
 
-		for(MacroToken token : this.tokens)
-		{
+		for(MacroToken token : this.tokens) {
 			Iterator<Entry<String, Object>> it = token.getMacros().entrySet().iterator();
-			while(it.hasNext())
-			{
+			while(it.hasNext()) {
 				Entry<String, Object> next = it.next();
 				String key = next.getKey();
 
-				for(int i = 0; i < newList.size(); i++)
-				{
+				for(int i = 0; i < newList.size(); i++) {
 					String line = newList.get(i);
-					if(line.contains(key))
-					{
+					if(line.contains(key)) {
 						Object value = next.getValue();
-						if(!(value instanceof List))
-						{
+						if(!(value instanceof List)) {
 							String stringMacro = value.toString();
 							newList.remove(i);
 							newList.add(i, StringUtils.replace(line, key, stringMacro));
 							
-						}
-						else
-						{
+						} else {
 							List<String> listMacro = (List<String>) value;
 
 							int startIndex = line.indexOf(key);
@@ -128,19 +112,16 @@ public class MacroParser implements Serializable {
 
 							String ending = line.substring(endIndex);
 							String appended = ending;
-							if(listMacro.size() >= 2)
-							{
+							if(listMacro.size() >= 2) {
 								appended = listMacro.get(1) + ending;
 							}
 
-							if(appended.length() > 0)
-							{
+							if(appended.length() > 0) {
 								i++;
 								newList.add(i, appended);
 							}
 
-							for(int j = 2; j < listMacro.size(); j++)
-							{
+							for(int j = 2; j < listMacro.size(); j++) {
 								i++;
 								newList.add(i, listMacro.get(j));
 							}
@@ -150,15 +131,11 @@ public class MacroParser implements Serializable {
 			}
 		}
 		
-		for(MacroToken token : this.tokens)
-		{
-			for(Entry<String, Object> entry : token.getMacros().entrySet())
-			{
+		for(MacroToken token : this.tokens) {
+			for(Entry<String, Object> entry : token.getMacros().entrySet()) {
 				String key = entry.getKey();
-				for(String line : newList)
-				{
-					if(line.contains(key))
-					{
+				for(String line : newList) {
+					if(line.contains(key)) {
 						return this.parseListMacros(newList);
 					}
 				}
