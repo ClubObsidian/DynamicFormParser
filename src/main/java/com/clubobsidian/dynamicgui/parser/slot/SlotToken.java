@@ -66,7 +66,7 @@ public class SlotToken implements Serializable {
 		this.metadata = this.parseMetadata(metadataSection);		
 	}
 	
-	private boolean parseBoolean(String data) {
+	/*private boolean parseBoolean(String data) {
 		if(data == null) {
 			return false;
 		}
@@ -90,7 +90,7 @@ public class SlotToken implements Serializable {
 		} catch(Exception ex) {
 			return 0;
 		}
-	}
+	}*/
 	
 	private Map<String, String> parseMetadata(ConfigurationSection section) {
 		Map<String, String> metadata = new HashMap<>();
