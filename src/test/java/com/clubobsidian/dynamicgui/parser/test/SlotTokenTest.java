@@ -42,7 +42,7 @@ public class SlotTokenTest {
 	
 	@Test
 	public void testSlotName() {
-		String name = token.getName();
+		String name = token.getLabel();
 		assertTrue("Name was not test for slot token", name.equals("test"));
 	}
 	

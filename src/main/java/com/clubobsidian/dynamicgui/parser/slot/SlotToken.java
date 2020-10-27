@@ -35,7 +35,7 @@ public class SlotToken implements Serializable {
 	
 	private int index;
 	private String icon;
-	private String name;
+	private String label;
 	private MacroParser macroParser;
 	private FunctionTree functionTree;
 	private Map<String, String> metadata;
@@ -57,7 +57,7 @@ public class SlotToken implements Serializable {
 		
 		this.index = index;
 		this.icon = this.macroParser.parseStringMacros(section.getString("icon"));
-		this.name = this.macroParser.parseStringMacros(section.getString("name"));
+		this.label = this.macroParser.parseStringMacros(section.getString("label"));
 		
 		ConfigurationSection functionsSection = section.getConfigurationSection("functions");
 		this.functionTree = new FunctionTree(functionsSection, this.macroParser);
@@ -111,8 +111,8 @@ public class SlotToken implements Serializable {
 		return this.icon;
 	}
 	
-	public String getName() {
-		return this.name;
+	public String getLabel() {
+		return this.label;
 	}
 	
 	public FunctionTree getFunctionTree() {
