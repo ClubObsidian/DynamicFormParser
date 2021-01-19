@@ -1,3 +1,14 @@
+# Project specific
+download_to
+download_from
+parse.txt
+download-to
+from_remote.yml
+local-repo
+remote.yml
+config.yml
+to_local.yml
+
 # Compiled class file
 *.class
 
@@ -6,6 +17,7 @@
 
 # BlueJ files
 *.ctxt
+
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -50,6 +62,12 @@ local.properties
 # Eclipse
 .project
 .classpath
+
+# Intellij
+.idea/
+*.iml
+*.ipr
+*.iws
 
 # External tool builders
 .externalToolBuilders/
