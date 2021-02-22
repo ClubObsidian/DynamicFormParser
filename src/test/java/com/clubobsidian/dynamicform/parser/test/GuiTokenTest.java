@@ -45,7 +45,13 @@ public class GuiTokenTest {
 		Configuration config = Configuration.load(file);
 		token = new GuiToken(config);
 	}
-	
+
+	@Test
+	public void testType() {
+		String title = token.getType();
+		assertEquals(title, "modal");
+	}
+
 	@Test
 	public void testTitle() {
 		String title = token.getTitle();

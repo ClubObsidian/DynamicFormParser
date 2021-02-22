@@ -1,5 +1,6 @@
 title: "test gui title"
 content: "foobar"
+type: "modal"
 rows: 1
 mode: "set"
 close: true

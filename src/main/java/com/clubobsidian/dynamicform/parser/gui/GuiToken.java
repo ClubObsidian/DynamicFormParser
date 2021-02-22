@@ -36,7 +36,8 @@ public class GuiToken implements Serializable {
 	private static final long serialVersionUID = -1815626830683338944L;
 	
 	private static final int MAX_SLOT_SIZE = 100; //Temporary fix
-	
+
+	private String type;
 	private String title;
 	private String content;
 	private List<String> alias;
@@ -62,6 +63,7 @@ public class GuiToken implements Serializable {
 		copyMacroTokens.add(new MacroToken(macrosSection));
 		
 		this.macroParser = new MacroParser(copyMacroTokens);
+		this.type = this.macroParser.parseStringMacros(this.getString(section, "type", "simple"));
 		this.title = this.macroParser.parseStringMacros(section.getString("title"));
 		this.content = this.macroParser.parseStringMacros(section.getString("content"));
 		this.alias = this.macroParser.parseListMacros(section.getStringList("alias"));
@@ -76,7 +78,15 @@ public class GuiToken implements Serializable {
 		ConfigurationSection metadataSection = section.getConfigurationSection("metadata");
 		this.metadata = this.parseMetadata(metadataSection);
 	}
-	
+
+	private String getString(ConfigurationSection section, String key, String defaultValue) {
+		String value = section.getString(key);
+		if(value == null) {
+			value = defaultValue;
+		}
+		return value;
+	}
+
 	private void loadNpcs(ConfigurationSection section) {
 		this.npcs = new HashMap<>();
 		ConfigurationSection npcSection = section.getConfigurationSection("npcs");
@@ -107,6 +117,10 @@ public class GuiToken implements Serializable {
 			metadata.put(parsedKey, value);
 		}
 		return metadata;
+	}
+
+	public String getType() {
+		return this.type;
 	}
 
 	public String getTitle() {
