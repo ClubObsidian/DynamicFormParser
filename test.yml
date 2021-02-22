@@ -1,7 +1,10 @@
 title: "test gui title"
+content: "foobar"
 rows: 1
 mode: "set"
 close: true
+metadata:
+  some: "metadata"
 npcs:
   citizens:
   - 5

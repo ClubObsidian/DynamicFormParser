@@ -38,6 +38,7 @@ public class GuiToken implements Serializable {
 	private static final int MAX_SLOT_SIZE = 100; //Temporary fix
 	
 	private String title;
+	private String content;
 	private List<String> alias;
 	private List<String> locations;
 	private Map<String, List<Integer>> npcs;
@@ -45,13 +46,14 @@ public class GuiToken implements Serializable {
 	private MacroParser macroParser;
 	private FunctionTree functions;
 	private List<String> loadMacros;
+	private Map<String, String> metadata;
 	
 	public GuiToken(ConfigurationSection section) {
 		this(section, new ArrayList<MacroToken>());
 	}
 	
 	public GuiToken(ConfigurationSection section, List<MacroToken> macroTokens) {
-		List<MacroToken> copyMacroTokens = new ArrayList<MacroToken>();
+		List<MacroToken> copyMacroTokens = new ArrayList<>();
 		for(MacroToken token : macroTokens) {
 			copyMacroTokens.add(token);
 		}
@@ -61,6 +63,7 @@ public class GuiToken implements Serializable {
 		
 		this.macroParser = new MacroParser(copyMacroTokens);
 		this.title = this.macroParser.parseStringMacros(section.getString("title"));
+		this.content = this.macroParser.parseStringMacros(section.getString("content"));
 		this.alias = this.macroParser.parseListMacros(section.getStringList("alias"));
 		this.locations = this.macroParser.parseListMacros(section.getStringList("locations"));
 		this.loadNpcs(section);
@@ -69,6 +72,9 @@ public class GuiToken implements Serializable {
 		ConfigurationSection guiFunctionsSection = section.getConfigurationSection("functions");
 		this.functions = new FunctionTree(guiFunctionsSection, this.macroParser);
 		this.loadMacros = section.getStringList("load-macros");
+
+		ConfigurationSection metadataSection = section.getConfigurationSection("metadata");
+		this.metadata = this.parseMetadata(metadataSection);
 	}
 	
 	private void loadNpcs(ConfigurationSection section) {
@@ -91,9 +97,24 @@ public class GuiToken implements Serializable {
 			}
 		}
 	}
-	
+
+	private Map<String, String> parseMetadata(ConfigurationSection section) {
+		Map<String, String> metadata = new HashMap<>();
+		for(String key : section.getKeys()) {
+			String parsedKey = this.macroParser.parseStringMacros(key);
+			String value = section.getString(parsedKey);
+			value = this.macroParser.parseStringMacros(value);
+			metadata.put(parsedKey, value);
+		}
+		return metadata;
+	}
+
 	public String getTitle() {
 		return this.title;
+	}
+
+	public String getContent() {
+		return this.content;
 	}
 	
 	public List<String> getAlias() {
@@ -122,5 +143,9 @@ public class GuiToken implements Serializable {
 	
 	public List<String> getLoadMacros() {
 		return this.loadMacros;
+	}
+
+	public Map<String, String> getMetadata() {
+		return this.metadata;
 	}
 }

@@ -15,6 +15,7 @@
  */
 package com.clubobsidian.dynamicform.parser.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -49,6 +50,19 @@ public class GuiTokenTest {
 	public void testTitle() {
 		String title = token.getTitle();
 		assertTrue("Gui title is not 'test gui title'", title.equals("test gui title"));
+	}
+
+	@Test
+	public void testContent() {
+		String title = token.getContent();
+		assertEquals(title, "foobar");
+	}
+
+	@Test
+	public void testMetadata() {
+		Map<String, String> metadata = token.getMetadata();
+		System.out.println(metadata.get("some"));
+		assertEquals(metadata.get("some"), "metadata");
 	}
 	
 	@Test
