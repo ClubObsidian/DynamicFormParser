@@ -65,7 +65,7 @@ public class GuiToken implements Serializable {
 		this.macroParser = new MacroParser(copyMacroTokens);
 		this.type = this.macroParser.parseStringMacros(this.getString(section, "type", "simple"));
 		this.title = this.macroParser.parseStringMacros(section.getString("title"));
-		this.content = this.macroParser.parseStringMacros(section.getString("content"));
+		this.content = this.macroParser.parseStringMacros(this.getStringListAsString(section, "content"));
 		this.alias = this.macroParser.parseListMacros(section.getStringList("alias"));
 		this.locations = this.macroParser.parseListMacros(section.getStringList("locations"));
 		this.loadNpcs(section);
@@ -85,6 +85,18 @@ public class GuiToken implements Serializable {
 			value = defaultValue;
 		}
 		return value;
+	}
+
+	private String getStringListAsString(ConfigurationSection section, String key) {
+		StringBuilder sb = new StringBuilder();
+		List<String> strList = section.getStringList(key);
+		for(int i = 0; i < strList.size(); i++) {
+			sb.append(strList.get(i));
+			if(i < strList.size() - 1) {
+				sb.append("\n");
+			}
+		}
+		return sb.toString();
 	}
 
 	private void loadNpcs(ConfigurationSection section) {
